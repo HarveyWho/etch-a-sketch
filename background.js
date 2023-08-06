@@ -3,6 +3,7 @@ for (let i = 0; i < 16; i++) {
     for (let j = 0; j < 16; j++){
         let div = document.createElement("div");
         // div.innerHTML=`${j+1}`
+        div.id = "pixel"
         document.getElementById("container").appendChild(div);
     }
 }
@@ -43,5 +44,5 @@ divs.forEach(div => {
 
 document.getElementById("button1").addEventListener('click', function() {
     let size = prompt("enter your ideal grid size 0-100:")
-    
+
 })
