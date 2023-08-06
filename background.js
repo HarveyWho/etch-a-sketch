@@ -12,7 +12,7 @@ let isDrawing = false;
 document.getElementById("container").addEventListener('mousedown', function(e) {
     if (e.target.id === "pixel") {
         isDrawing = true;
-        e.target.style.backgroundColor = 'blue'; // Color the initial div
+        // e.target.style.backgroundColor = 'blue'; // Color the initial div
     }
 });
 
@@ -21,14 +21,22 @@ document.getElementById("container").addEventListener('mouseup', function() {
     isDrawing = false;
 });
 
+const colorPicker = document.getElementById('colorPicker');
+
+// Update attachDrawingEvents() function:
+
 function attachDrawingEvents() {
     const divs = document.querySelectorAll('#container div');
     
     divs.forEach(div => {
         div.addEventListener('mouseenter', function() {
             if (isDrawing) {
-                this.style.backgroundColor = 'blue';
+                this.style.backgroundColor = colorPicker.value;
             }
+        });
+
+        div.addEventListener('mousedown', function() {
+            this.style.backgroundColor = colorPicker.value;
         });
     });
 }

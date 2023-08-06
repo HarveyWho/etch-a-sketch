@@ -29,3 +29,9 @@ body {
     display: flex;
     flex-basis: 35px;   
 }
+
+.toolbar {
+    display: flex;
+    gap: 20px;  /* space between color picker and button */
+    margin-bottom: 10px; /* space between toolbar and grid */
+}
