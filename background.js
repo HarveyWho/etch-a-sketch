@@ -41,3 +41,7 @@ divs.forEach(div => {
     });
 });
 
+document.getElementById("button1").addEventListener('click', function() {
+    let size = prompt("enter your ideal grid size 0-100:")
+    
+})
