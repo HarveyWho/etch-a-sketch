@@ -7,13 +7,37 @@ for (let i = 0; i < 16; i++) {
     }
 }
 
+let isDrawing = false;
+
+// When the mouse is pressed down, start drawing
+document.addEventListener('mousedown', function() {
+    isDrawing = true;
+});
+
+// When the mouse is released or leaves the window, stop drawing
+document.addEventListener('mouseup', function() {
+    isDrawing = false;
+});
+document.addEventListener('mouseleave', function() {
+    isDrawing = false;
+});
+
 // Select all divs inside #container
 const divs = document.querySelectorAll('#container div');
 
 // Add the event listener to each div
 divs.forEach(div => {
     div.addEventListener('mouseenter', function() {
-        // Change the background color to, for example, blue
-        this.style.backgroundColor = 'blue';
+        if (isDrawing) {
+            this.style.backgroundColor = 'blue'; // or getRandomColor() if you prefer random colors
+        }
     });
 });
+
+// Optional: You might also want to color the div where the user starts the drawing
+divs.forEach(div => {
+    div.addEventListener('mousedown', function() {
+        this.style.backgroundColor = 'blue'; // or getRandomColor()
+    });
+});
+
