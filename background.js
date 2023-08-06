@@ -10,18 +10,18 @@ for (let i = 0; i < 16; i++) {
 
 let isDrawing = false;
 
-// When the mouse is pressed down, start drawing
-document.addEventListener('mousedown', function() {
-    isDrawing = true;
+// When the mouse is pressed down inside the container, start drawing
+document.getElementById("container").addEventListener('mousedown', function(e) {
+    if (e.target.id === "pixel") {
+        isDrawing = true;
+    }
 });
 
-// When the mouse is released or leaves the window, stop drawing
-document.addEventListener('mouseup', function() {
+// When the mouse is released inside the container, stop drawing
+document.getElementById("container").addEventListener('mouseup', function() {
     isDrawing = false;
 });
-document.addEventListener('mouseleave', function() {
-    isDrawing = false;
-});
+
 
 // Select all divs inside #container
 const divs = document.querySelectorAll('#container div');
@@ -42,7 +42,48 @@ divs.forEach(div => {
     });
 });
 
-document.getElementById("button1").addEventListener('click', function() {
-    let size = prompt("enter your ideal grid size 0-100:")
+function attachDrawingEvents() {
+    const divs = document.querySelectorAll('#container div');
+    
+    divs.forEach(div => {
+        div.addEventListener('mouseenter', function() {
+            if (isDrawing) {
+                this.style.backgroundColor = 'blue';
+            }
+        });
 
-})
+        div.addEventListener('mousedown', function() {
+            this.style.backgroundColor = 'blue';
+        });
+    });
+}
+
+document.getElementById("button1").addEventListener('click', function() {
+    let size = parseInt(prompt("Enter your ideal grid size 0-100:"));
+    
+    // Validate the size
+    if (isNaN(size) || size <= 0 || size > 100) {
+        alert("Invalid input. Please enter a number between 1 and 100.");
+        return;
+    }
+
+    let gridSize = 560 / size;
+    let container = document.getElementById("container");
+
+    // Clear the container's current divs
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    // Create and append the new divs based on the input size
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            let div = document.createElement("div");
+            div.style.width = gridSize + 'px';
+            div.style.height = gridSize + 'px';
+            container.appendChild(div);
+        }
+    }
+
+    attachDrawingEvents();
+});
