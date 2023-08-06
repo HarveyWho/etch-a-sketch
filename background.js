@@ -79,8 +79,9 @@ document.getElementById("button1").addEventListener('click', function() {
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
             let div = document.createElement("div");
-            div.style.width = gridSize + 'px';
-            div.style.height = gridSize + 'px';
+            
+            div.style.display = 'flex';
+            div.style.flexBasis = gridSize + 'px';
             container.appendChild(div);
         }
     }
