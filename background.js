@@ -6,3 +6,14 @@ for (let i = 0; i < 16; i++) {
         document.getElementById("container").appendChild(div);
     }
 }
+
+// Select all divs inside #container
+const divs = document.querySelectorAll('#container div');
+
+// Add the event listener to each div
+divs.forEach(div => {
+    div.addEventListener('mouseenter', function() {
+        // Change the background color to, for example, blue
+        this.style.backgroundColor = 'blue';
+    });
+});
