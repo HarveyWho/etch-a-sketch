@@ -1,9 +1,7 @@
-
 for (let i = 0; i < 16; i++) {
     for (let j = 0; j < 16; j++){
         let div = document.createElement("div");
-        // div.innerHTML=`${j+1}`
-        div.id = "pixel"
+        div.id = "pixel";
         document.getElementById("container").appendChild(div);
     }
 }
@@ -14,32 +12,13 @@ let isDrawing = false;
 document.getElementById("container").addEventListener('mousedown', function(e) {
     if (e.target.id === "pixel") {
         isDrawing = true;
+        e.target.style.backgroundColor = 'blue'; // Color the initial div
     }
 });
 
 // When the mouse is released inside the container, stop drawing
 document.getElementById("container").addEventListener('mouseup', function() {
     isDrawing = false;
-});
-
-
-// Select all divs inside #container
-const divs = document.querySelectorAll('#container div');
-
-// Add the event listener to each div
-divs.forEach(div => {
-    div.addEventListener('mouseenter', function() {
-        if (isDrawing) {
-            this.style.backgroundColor = 'blue'; // or getRandomColor() if you prefer random colors
-        }
-    });
-});
-
-// Optional: You might also want to color the div where the user starts the drawing
-divs.forEach(div => {
-    div.addEventListener('mousedown', function() {
-        this.style.backgroundColor = 'blue'; // or getRandomColor()
-    });
 });
 
 function attachDrawingEvents() {
@@ -51,12 +30,11 @@ function attachDrawingEvents() {
                 this.style.backgroundColor = 'blue';
             }
         });
-
-        div.addEventListener('mousedown', function() {
-            this.style.backgroundColor = 'blue';
-        });
     });
 }
+
+// Initially attach drawing events to the default grid
+attachDrawingEvents();
 
 document.getElementById("button1").addEventListener('click', function() {
     let size = parseInt(prompt("Enter your ideal grid size 0-100:"));
@@ -79,8 +57,7 @@ document.getElementById("button1").addEventListener('click', function() {
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
             let div = document.createElement("div");
-            
-            div.style.display = 'flex';
+            div.id = "pixel";
             div.style.flexBasis = gridSize + 'px';
             container.appendChild(div);
         }
